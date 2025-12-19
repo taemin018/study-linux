@@ -1,0 +1,52 @@
+시작 서비스
+	시스템 구동 시 최초로 실행되는 사용자 레벨 프로세스(PID 1)이다.
+	이는 시스템 구동에 필요한 각종 스크립트를 실행한다.
+		
+	$ cd /etc/init.d
+	/etc/init.d$ ls -l
+	/etc/init.d$ cd /etc
+	/etc$ ls -ld rc*
+	/etc$ ls -l rc5.d/
+
+	여러 개의 시작 서비스(init process) 중 systemd를 대부분 사용한다.
+	기존 init process보다 더 넓은 범위의 기능을 제공하며, Unix 철학과 상충한다.
+	Unix 철학은 "단순하고 짧고 명료하고 모듈 방식의 확장"이다.
+	Red Hat, Debian, Ubuntu에서 systemd가 기본 init process로 선택되면서
+	시작 서비스에 대한 논란이 끝이 났다.
+
+	$ ls -al /sbin/init
+
+systemd
+	기존 init process의 기능을 모두 지원하며, 이를 통합해 놓은 시작 서비스이다.
+	동작 모드에 따른 시작 서비스 관리가 가능하며(기존에는 Run Level 사용),
+	작업을 병렬로 실행하고 작업별 종속성을 관리한다. 또한 로그는 journald를 
+	사용하여 통합적으로 관리한다. networkd를 사용하여 네트워크 연결도 관리할 수 있고, 
+	logind를 통해 로그인 관리가 가능하다. 이 모든 것을 통합해놓은 것이 systemd이다.
+
+Unit
+	systemd가 관리하는 기본 개체 단위를 의미한다.
+	Unit의 유형은 다음과 같다.
+	service, socket, device, mount, automount, swap, target, path, timer, slice, scope.
+	이러한 유형은 Unit 파일의 suffix로 활용된다. 예를 들어, ssh.service와 같이 작성한다.
+
+	$ ls -al /etc/systemd/system
+		sshd.service -> /lib/systemd/system/ssh.service
+	$ cat /lib/systemd/system/ssh.service
+
+systemctl
+	systemd의 상태를 확인하고 설정을 변경할 때 사용되는 도구이다.
+
+	active 상태의 서비스 확인
+	$ systemctl list-units --type=service
+
+	active 여부와 관계없이 모든 서비스 확인
+	$ systemctl list-unit-files --type=service
+	$ systemctl list-unit-files --type=service | grep ssh
+
+
+
+
+
+
+
+
