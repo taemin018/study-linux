@@ -74,8 +74,50 @@ GUI(Graphical User Interfaces)
     3. 장치 드라이버
     4. 시스템 호출 및 보안
 
+Linux System Booting
 
+1. 전원인가
 
+2. BIOS
+
+        컴퓨터에 전원이 인가되면 실행되는 최초의 프로그램이다.
+		디바이스를 초기화하고 검사 (POST, Power On Self Test)하는 역할을 수행하고
+		Boot Loader와 운영 체제를 메모리(RAM, Random Access Memory)로 올리는 기능을 수행한다.
+
+        - BIOS(Basic Input/Output System) 또는 UEFI(Unified Extensible Firmware Interface) 로드
+   
+            ※ BIOS: 전통적인 PC 펌웨어
+			※ UEFI: BIOS를 조금 더 정형화하고 표준화한 PC 펌웨어, 2TB 이상 Storage 지원, 더 빠른 부팅 시간, UI 및 기능 개선 등
+			※ 펌웨어: 하드웨어를 제어하는 가장 기본적인 프로그램
+			※ PC 환경에서는 UEFI가 표준화되어 가고 있지만, 가상화 환경에서는 BIOS가 여전히 많이 사용된다.
+
+        - 하드웨어 검사
+        - 부팅 기기 선택
+        - EFI 시스템 파티션 식별
+
+3. Boot Loader
+
+        - 부트 로더(Boot Loader)는 컴퓨터 시스템이 부팅될 때 최초로 실행되는 프로그램이다.
+        - 대부분 리눅스 배포판에서 기본 부트로더로 GRUB(Grand Unified Boot Loader)을 사용한다.
+        - 운영 체제를 실행하기 전에 하드웨어 초기화, 시스템 구성, 운영 체제 로딩을 담당한다.
+		- 여러 운영체제를 불러온 경우 어떤 것을 부팅할지 사용자가 선택할 수 있도록 UI를 제공한다.
+
+        즉, 컴퓨터의 전원이 켜질 때부터 운영 체제가 동작할 때까지의 초기화 및 준비과정을 담당하는 중요한 소프트웨어이다.
+
+        - Boot Loader 로드
+        - 부팅할 커널 선택
+        - 커널 로드
+
+4. Linux
+
+       운영체제는 각 하드웨어에 알맞는 전기신호를 보내주는 역할을 한다.
+
+       - 커널 자료구조 초기화
+       - init/systemd 시작
+       - 시작 스크립트 실행
+       - 시스템 실행
+
+   
 
 
 
